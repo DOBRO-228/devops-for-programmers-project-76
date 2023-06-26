@@ -1,0 +1,8 @@
+---
+- hosts: all
+  # gather_facts: no
+
+  roles:
+    - role: geerlingguy.pip
+    - role: geerlingguy.docker
+      become: yes
