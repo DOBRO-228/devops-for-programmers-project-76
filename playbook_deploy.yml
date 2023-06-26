@@ -1,0 +1,36 @@
+---
+- hosts: all
+  # gather_facts: no
+  vars:
+    env_vars:
+      DB_HOST: localhost
+      DB_USER: user
+      DB_PASS: secret
+
+
+  tasks:
+
+    - name: Create .env file from template
+      template:
+        src: "{{ local_project_path }}/templates/env.j2"
+        dest: "{{ server_env_path }}"
+    
+    - name: Run PostgreSQL container
+      docker_container:
+        name: postgres
+        image: postgres
+        state: started
+        env_file: "{{ server_env_path }}"
+        published_ports:
+          - "{{ DATABASE_PORT }}:{{ DATABASE_PORT }}"
+
+    - name: Run Redmine container
+      docker_container:
+        name: redmine
+        image: redmine
+        state: started
+        env_file: "{{ server_env_path }}"
+        links:
+          - "postgres:db"
+        published_ports:
+          - "3000:3000"

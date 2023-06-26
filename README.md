@@ -9,3 +9,9 @@
 ### Instructions
 
 - Install roles: `make install_roles`
+- Pull images: `make pull_images`
+- Deploy: `make deploy`
+
+### URL
+
+`https://228.dobro-228.ru/`
