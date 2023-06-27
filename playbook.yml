@@ -19,7 +19,7 @@
 
     - name: Create .env file from template
       template:
-        src: "{{ local_project_path }}/templates/env.j2"
+        src: "{{ playbook_dir }}/templates/env.j2"
         dest: "{{ server_env_path }}"
       tags: deploy
 
@@ -41,7 +41,7 @@
   tasks:
     - name: Configure HTTP check for DataDog
       template: 
-        src: "{{ local_project_path }}/templates/datadog/http_check.yaml.j2"
+        src: "{{ playbook_dir }}/templates/datadog/http_check.yaml.j2"
         dest: /etc/datadog-agent/conf.d/http_check.d/conf.yaml
       notify:
         - Restart DataDog Agent
