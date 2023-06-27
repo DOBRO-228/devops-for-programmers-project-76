@@ -9,7 +9,7 @@
 ### Instructions
 
 - Install roles: `make install_roles`
-- Pull images: `make pull_images`
+- Prepare servers: `make prepare`
 - Deploy: `make deploy`
 - Update vault: `make update_vault`
 

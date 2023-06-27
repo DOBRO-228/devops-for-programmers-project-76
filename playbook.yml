@@ -5,6 +5,7 @@
   roles:
     - role: geerlingguy.pip
     - role: geerlingguy.docker
+    - role: datadog.datadog
       become: yes
 
 
@@ -14,4 +15,19 @@
       docker_image:
         name: redmine:latest
         source: pull
-      tags: pull
+      tags: prepare
+
+    - name: Create .env file from template
+      template:
+        src: "{{ local_project_path }}/templates/env.j2"
+        dest: "{{ server_env_path }}"
+      tags: deploy
+
+    - name: Run Redmine container
+      docker_container:
+        name: redmine
+        image: redmine
+        state: started
+        env_file: "{{ server_env_path }}"
+        network_mode: host
+      tags: deploy
