@@ -8,7 +8,7 @@
 
 ### Instructions
 
-- Install roles: `make install_roles`
+- Install roles: `make install_requirements`
 - Prepare servers: `make prepare`
 - Deploy: `make deploy`
 - Setup Datadog: `make setup_datadog`
