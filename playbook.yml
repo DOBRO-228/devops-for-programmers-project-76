@@ -3,10 +3,10 @@
   # gather_facts: no
 
 
+  become: yes
   roles:
     - role: geerlingguy.pip
     - role: geerlingguy.docker
-      become: yes
 
 
   tasks:
