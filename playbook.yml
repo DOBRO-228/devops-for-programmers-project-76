@@ -2,10 +2,10 @@
 - hosts: all
   # gather_facts: no
 
+
   roles:
     - role: geerlingguy.pip
     - role: geerlingguy.docker
-    - role: datadog.datadog
       become: yes
 
 
@@ -31,3 +31,24 @@
         env_file: "{{ server_env_path }}"
         network_mode: host
       tags: deploy
+
+
+
+- hosts: webservers
+  become: yes
+  roles:
+    - datadog.datadog
+  tasks:
+    - name: Configure HTTP check for DataDog
+      template: 
+        src: "{{ local_project_path }}/templates/datadog/http_check.yaml.j2"
+        dest: /etc/datadog-agent/conf.d/http_check.d/conf.yaml
+      notify:
+        - Restart DataDog Agent
+      tags: datadog
+
+  handlers:
+    - name: Restart DataDog Agent
+      systemd:
+        state: restarted
+        name: datadog-agent

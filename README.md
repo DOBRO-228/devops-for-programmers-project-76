@@ -11,6 +11,7 @@
 - Install roles: `make install_roles`
 - Prepare servers: `make prepare`
 - Deploy: `make deploy`
+- Setup Datadog: `make setup_datadog`
 - Update vault: `make update_vault`
 
 ### URL
