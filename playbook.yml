@@ -15,9 +15,3 @@
         name: redmine:latest
         source: pull
       tags: pull
-
-    - name: Pull Postgres Docker image
-      docker_image:
-        name: postgres:latest
-        source: pull
-      tags: pull

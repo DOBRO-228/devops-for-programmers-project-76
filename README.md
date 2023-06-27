@@ -11,6 +11,7 @@
 - Install roles: `make install_roles`
 - Pull images: `make pull_images`
 - Deploy: `make deploy`
+- Update vault: `make update_vault`
 
 ### URL
 
